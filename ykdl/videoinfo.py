@@ -19,6 +19,7 @@ class VideoInfo():
         self.streams = {}
         self.live = live
         self.extra = {"ua": "", "referer": "", "header": "", "proxy": "", "rangefetch": ""}
+        self.raw = {}
 
     def print_stream_info(self, stream_id, show_all = False):
         stream = self.streams[stream_id]
@@ -45,6 +46,7 @@ class VideoInfo():
         json_dict['streams'] = self.streams
         json_dict['stream_types'] = self.stream_types
         json_dict['extra'] = self.extra
+        json_dict['raw'] = self.raw
         for s in json_dict['streams']:
             if json_dict['streams'][s].get('size') == float('inf'):
                 json_dict['streams'][s].pop('size')

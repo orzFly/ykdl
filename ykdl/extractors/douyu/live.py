@@ -46,9 +46,11 @@ class Douyutv(VideoExtractor):
             title = match1(html, 'Title-headlineH2">([^<]+)<')
             artist = match1(html, 'Title-anchorName" title="([^"]+)"')
 
-        if not artist:
+        # if not artist:
+        if True:
             html_content = get_content('https://open.douyucdn.cn/api/RoomApi/room/' + self.vid)
             data = json.loads(html_content)
+            info.raw['douyu_room'] = data
             if data['error'] == 0:
                 title = data['data']['room_name']
                 artist = data['data']['owner_name']
@@ -111,7 +113,8 @@ class Douyutv(VideoExtractor):
                 'container': 'flv',
                 'video_profile': video_profile,
                 'src' : [real_url],
-                'size': float('inf')
+                'size': float('inf'),
+                'raw_douyu_live_data': live_data
             }
 
             
